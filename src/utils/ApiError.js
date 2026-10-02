@@ -1,0 +1,25 @@
+class ApiError extends Error {
+    constructor(
+        statusCode,
+        message= "Something went wrong",
+        errors = [],
+        stack =""
+    ){
+        super(message)
+        this.statusCode = statusCode
+        this.data = null
+        this.message = message
+        // success code nhi jayega bcz here we are handeling the error not the api response
+        this.success =false;
+        this.errors = errors
+
+        if(stack){
+            this.stack = stack
+        }
+        else{
+            Error.captureSatckTrace(this, this.constructor)
+        }
+    }
+}
+
+export {ApiError}
